@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/28 20:08:26 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/30 22:11:27 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/30 22:49:59 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class Reactor
 		void closeReactor();
 
 		void addInterest(epoll_event event);
-		void addInterest(int interest);
+		void addInterest(int interest, uint32_t mask = (EPOLLIN | EPOLLOUT));
 		void removeInterest(int interest);
 		void monitorInterests();
 };

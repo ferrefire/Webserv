@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/28 20:10:52 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/30 22:14:32 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/30 22:52:29 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void Reactor::createReactor(Server* server, int serverDescriptor)
 
 	if (fd < 0) throw (std::runtime_error("failed to create reactor"));
 
-	addInterest(serverDescriptor);
+	addInterest(serverDescriptor, EPOLLIN);
 }
 
 void Reactor::closeReactor()
@@ -54,11 +54,11 @@ void Reactor::addInterest(epoll_event event)
 	if (epoll_ctl(fd, EPOLL_CTL_ADD, event.data.fd, &event) < 0) throw (std::runtime_error("failed to add interest"));
 }
 
-void Reactor::addInterest(int interest)
+void Reactor::addInterest(int interest, uint32_t mask)
 {
 	epoll_event event;
 	event.data.fd = interest;
-	event.events = EPOLLIN;
+	event.events = mask;
 
 	addInterest(event);
 }
@@ -83,6 +83,9 @@ void Reactor::monitorInterests()
 
 			if (event == serverDescriptor)
 			{
+				//std::cout << "can read: " << ((events[i].events & EPOLLIN) == EPOLLIN) << std::endl;
+				//std::cout << "can write: " << ((events[i].events & EPOLLOUT) == EPOLLOUT) << std::endl;
+
 				Socket* newSocket = server->getNewSocket();
 				newSocket->descriptor = accept(serverDescriptor, (sockaddr *)&newSocket->address, &newSocket->length);
 
@@ -91,6 +94,9 @@ void Reactor::monitorInterests()
 			}
 			else
 			{
+				//std::cout << "can read: " << ((events[i].events & EPOLLIN) == EPOLLIN) << std::endl;
+				//std::cout << "can write: " << ((events[i].events & EPOLLOUT) == EPOLLOUT) << std::endl;
+
 				char buffer[1024] = {0};
 				int n = recv(event, buffer, sizeof(buffer), 0);
 				if (n > 0)
