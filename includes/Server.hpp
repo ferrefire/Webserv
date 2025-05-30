@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/28 18:28:31 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/28 21:17:29 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/30 21:56:41 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,20 @@
 #include "Socket.hpp"
 #include "Reactor.hpp"
 
+#include <vector>
+
 #include <sys/socket.h>
 #include <sys/epoll.h>
 #include <netinet/in.h>
 
+class Reactor;
+
 class Server
 {
 	private:
-		Socket serverSocket;
+		Socket* serverSocket;
 		Reactor serverReactor;
+		std::vector<Socket*> activeSockets;
 
 	public:
 		Server();
@@ -34,6 +39,8 @@ class Server
 		void createServerReactor();
 
 		void closeServer();
+		void closeSockets();
 
 		void startServer();
+		Socket* getNewSocket();
 };

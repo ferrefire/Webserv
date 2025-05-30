@@ -6,11 +6,13 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/28 19:39:58 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/28 22:34:18 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/30 22:29:21 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Server.hpp"
+
+#include "Sending.hpp"
 
 #include <iostream>
 #include <exception>
@@ -43,42 +45,73 @@ void Server::createServer()
 
 void Server::createServerSocket()
 {
-	serverSocket.createSocket(AF_INET, SOCK_STREAM, 0);
-	serverSocket.bindSocket(AF_INET, 8080, INADDR_ANY);
+	serverSocket = getNewSocket();
+	serverSocket->client = false;
+	serverSocket->descriptor = socket(AF_INET, SOCK_STREAM, 0);
+
+	if (serverSocket->descriptor < 0) throw (std::runtime_error("failed to create socket"));
+
+	int opt = 1;
+	if (setsockopt(serverSocket->descriptor, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
+		throw (std::runtime_error("failed to set socket option"));
+
+	serverSocket->address.sin_family = AF_INET;
+	serverSocket->address.sin_port = htons(8080);
+	serverSocket->address.sin_addr.s_addr = INADDR_ANY;
+	serverSocket->length = sizeof(serverSocket->address);
+
+	if (bind(serverSocket->descriptor, (sockaddr *)&serverSocket->address, serverSocket->length) < 0) throw (std::runtime_error("failed to bind socket"));
 }
 
 void Server::createServerReactor()
 {
-	serverReactor.createReactor(serverSocket.getfd());
+	serverReactor.createReactor(this, serverSocket->descriptor);
 }
 
 void Server::closeServer()
 {
-	try
+	std::cout << "closing server" << std::endl;
+
+	closeSockets();
+	serverReactor.closeReactor();
+
+	//try
+	//{
+	//	closeSockets();
+	//	serverReactor.closeReactor();
+	//}
+	//catch(const std::exception& e)
+	//{
+	//	std::cerr << e.what() << '\n';
+	//	throw (std::runtime_error("failed to close server"));
+	//}
+}
+
+void Server::closeSockets()
+{
+	for (Socket* socket : activeSockets)
 	{
-		serverSocket.closeSocket();
-		serverReactor.closeReactor();
+		if (socket->descriptor >= 0)
+		{
+			//if (socket->client) Sending::sendError(socket->descriptor);
+			//serverReactor.removeInterest(socket->descriptor);
+			close(socket->descriptor);
+		}
+		delete (socket);
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		throw (std::runtime_error("failed to close server"));
-	}
-	
+	activeSockets.clear();
 }
 
 void Server::startServer()
 {
-	serverSocket.startListening(5);
-	epoll_event event;
-	event.events = EPOLLIN;
-	event.data.fd = serverSocket.getfd();
-	serverReactor.addInterest(event);
+	if (listen(serverSocket->descriptor, 5) < 0) throw (std::runtime_error("socket failed to start listening"));
 	serverReactor.monitorInterests();
+}
 
-	//int clientSocket = accept(serverSocket.getfd(), nullptr, nullptr);
-	//char buffer[1024] = {0};
-	//recv(clientSocket, buffer, sizeof(buffer), 0);
-	//std::cout << "Message from client: " << buffer << std::endl;
-	//close(clientSocket);
+Socket* Server::getNewSocket()
+{
+	Socket* newSocket = new Socket();
+	activeSockets.push_back(newSocket);
+
+	return (newSocket);
 }

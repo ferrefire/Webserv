@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   Socket.hpp                                         :+:    :+:            */
+/*   Manager.hpp                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/05/28 18:33:03 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/30 22:33:18 by ferre         ########   odam.nl         */
+/*   Created: 2025/05/30 20:36:04 by ferre         #+#    #+#                 */
+/*   Updated: 2025/05/30 21:12:04 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <sys/socket.h>
-#include <netinet/in.h>
+#include "Server.hpp"
 
-class Socket
+#include <vector>
+
+class Manager
 {
 	private:
+		static std::vector<Server*> activeServers;
 
 	public:
-		Socket();
-		Socket(int descriptor, sockaddr_in address, socklen_t length);
-		~Socket();
+		Manager();
+		~Manager();
 
-		int descriptor = -1;
-		sockaddr_in address = {};
-		socklen_t length = {};
-		bool client = true;
+		static void start();
+
+		static void createServers();
+
+		static void closeApplication();
+		static void closeServers();	
+
+		static Server* getNewServer();
 };

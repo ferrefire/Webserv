@@ -6,11 +6,11 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/28 21:27:17 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/28 21:55:09 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/30 21:16:06 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Server.hpp"
+#include "Manager.hpp"
 
 #include <iostream>
 #include <exception>
@@ -19,9 +19,8 @@ int main()
 {
 	try
 	{
-		Server server;
-		server.createServer();
-		server.startServer();
+		Manager::start();
+		Manager::createServers();
 	}
 	catch(const std::exception& e)
 	{
@@ -30,6 +29,8 @@ int main()
 	}
 
 	std::cout << "end of program" << std::endl;
+
+	Manager::closeApplication();
 
 	return (0);
 }

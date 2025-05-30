@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   Socket.hpp                                         :+:    :+:            */
+/*   Sending.hpp                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/05/28 18:33:03 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/30 22:33:18 by ferre         ########   odam.nl         */
+/*   Created: 2025/05/30 17:39:21 by ferre         #+#    #+#                 */
+/*   Updated: 2025/05/30 22:03:14 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <sys/socket.h>
-#include <netinet/in.h>
+#include <string>
 
-class Socket
+class Sending
 {
 	private:
+		Sending();
+		~Sending();
 
 	public:
-		Socket();
-		Socket(int descriptor, sockaddr_in address, socklen_t length);
-		~Socket();
-
-		int descriptor = -1;
-		sockaddr_in address = {};
-		socklen_t length = {};
-		bool client = true;
+		static std::string fileToString(std::string path);
+		static void sendError(int target);
+		static void sendHeader(int target, size_t size);
+		static void sendContent(int target, std::string content);
+		static void sendPage(int target, std::string path);
 };
