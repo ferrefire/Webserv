@@ -1,5 +1,5 @@
 CC = c++
-CFLAGS = -Iincludes/ -Wall -Wall -Werror
+CFLAGS = -std=c++23 -Iincludes/ -Wall -Wall -Werror
 LDFLAGS = 
 
 SRCDIR = sources

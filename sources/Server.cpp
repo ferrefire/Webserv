@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/28 19:39:58 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/30 22:29:21 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/31 17:22:09 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,14 @@ Socket* Server::getNewSocket()
 	activeSockets.push_back(newSocket);
 
 	return (newSocket);
+}
+
+Socket* Server::getSocket(int descriptor)
+{
+	for (Socket* socket : activeSockets)
+	{
+		if (socket->descriptor == descriptor) return (socket);
+	}
+
+	return (nullptr);
 }

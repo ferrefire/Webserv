@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/28 20:10:52 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/30 22:52:29 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/31 17:22:58 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "Sending.hpp"
 #include "Server.hpp"
+#include "Request.hpp"
 
 #include <stdexcept>
 #include <iostream>
@@ -65,8 +66,8 @@ void Reactor::addInterest(int interest, uint32_t mask)
 
 void Reactor::removeInterest(int interest)
 {
-	//if (epoll_ctl(fd, EPOLL_CTL_DEL, interest, nullptr) < 0) throw (std::runtime_error("failed to remove interest"));
-	epoll_ctl(fd, EPOLL_CTL_DEL, interest, nullptr);
+	if (epoll_ctl(fd, EPOLL_CTL_DEL, interest, nullptr) < 0) throw (std::runtime_error("failed to remove interest"));
+	//epoll_ctl(fd, EPOLL_CTL_DEL, interest, nullptr);
 }
 
 void Reactor::monitorInterests()
@@ -102,6 +103,10 @@ void Reactor::monitorInterests()
 				if (n > 0)
 				{
 					std::cout << buffer << std::endl;
+
+					Request req(*server->getSocket(event), buffer);
+					std::cout << req << std::endl;
+
 					Sending::sendPage(event, "html/test.html");
 				}
 			}

@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/28 18:28:31 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/30 21:56:41 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/31 17:21:09 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,5 @@ class Server
 
 		void startServer();
 		Socket* getNewSocket();
+		Socket* getSocket(int descriptor);
 };
