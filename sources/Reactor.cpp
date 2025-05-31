@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/28 20:10:52 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/31 18:11:26 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/31 20:42:05 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void Reactor::monitorInterests()
 				int n = recv(event, buffer, sizeof(buffer), 0);
 				if (n > 0)
 				{
-					//std::cout << buffer << std::endl;
+					std::cout << buffer << std::endl;
 
 					Request req(*server->getSocket(event), buffer);
 					std::cout << req << std::endl;

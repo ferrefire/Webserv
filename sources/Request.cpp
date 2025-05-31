@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/31 16:39:59 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/31 18:02:52 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/31 20:30:57 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ std::ostream &operator<<(std::ostream &out, Request &request)
 	out << "Page: " << request.getData(Request::Data::Page) << std::endl;
 	out << "Host: " << request.getData(Request::Data::Host) << std::endl;
 	out << "Port: " << request.getData(Request::Data::Port) << std::endl;
+	out << "Type: " << request.getData(Request::Data::Type) << std::endl;
 	out << "Referer: " << request.getData(Request::Data::Referer) << std::endl;
 	out << "Connection: " << request.getData(Request::Data::Connection) << std::endl;
 

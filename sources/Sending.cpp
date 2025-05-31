@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/30 17:40:22 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/31 18:28:40 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/31 20:43:25 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void Sending::sendHeader(int target, size_t size, Sending::HeaderType type)
 
 	if (type == Sending::HeaderType::Css) headerStream << "Content-Type: text/css; charset=UTF-8\r\n";
 	else if (type == Sending::HeaderType::Html) headerStream << "Content-Type: text/html; charset=UTF-8\r\n";
+	else if (type == Sending::HeaderType::Js) headerStream << "Content-Type: application/javascript; charset=UTF-8\r\n";
 
     headerStream << "Content-Length: " << size << "\r\n";
 
@@ -85,24 +86,14 @@ void Sending::sendContent(int target, std::string content)
 	send(target, content.c_str(), content.length(), 0);
 }
 
-void Sending::sendPage(int target, std::string path)
+void Sending::sendPage(int target, std::string path, Request request)
 {
-	if (path == "/") path = "/test";
+	Sending::HeaderType type = Sending::HeaderType::Error;
+	if (request.getData(Request::Data::Type) == "document") type = Sending::HeaderType::Html;
+	else if (request.getData(Request::Data::Type) == "style") type = Sending::HeaderType::Css;
+	else if (request.getData(Request::Data::Type) == "script") type = Sending::HeaderType::Js;
 
-	Sending::HeaderType type;
-
-	if (path.find(".css") != std::string::npos)
-	{
-		type = Sending::HeaderType::Css;
-		path.replace(0, 1, "css/");
-		//path.append(".html");
-	}
-	else
-	{
-		type = Sending::HeaderType::Html;
-		path.replace(0, 1, "html/");
-		path.append(".html");
-	}
+	std::cout << path << " - " << (int)type << std::endl;
 
 	std::string content = Sending::fileToString(path);
 

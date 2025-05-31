@@ -1,13 +1,26 @@
-body {
-  background-color: lightblue;
+body 
+{
+	background-color: rgba(96, 255, 167, 0.596);
 }
 
-h1 {
-  color: white;
-  text-align: center;
+h1 
+{
+	font-family: verdana;
+	color: rgb(0, 141, 117);
+	text-align: center;
 }
 
-p {
-  font-family: verdana;
-  font-size: 20px;
+p 
+{
+	color: rgb(0, 169, 150);
+	font-family: verdana;
+	font-size: 20px;
+	text-align: center;
+}
+
+a 
+{
+	font-family: verdana;
+	font-size: 20px;
+	text-align: center;
 }
