@@ -6,13 +6,13 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/31 16:39:59 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/31 17:38:21 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/31 18:02:52 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Request.hpp"
 
-Request::Request(Socket& socket, std::string content) : socket(socket), content(content)
+Request::Request(Socket& requestSocket, std::string content) : requestSocket(requestSocket), content(content)
 {
 
 }
@@ -49,6 +49,11 @@ std::string Request::getData(Request::Data type)
 	if (!contentData.contains(type)) contentData[type] = extractData(type);
 
 	return (contentData[type]);
+}
+
+Socket& Request::getSocket()
+{
+	return (requestSocket);
 }
 
 std::ostream &operator<<(std::ostream &out, Request &request)

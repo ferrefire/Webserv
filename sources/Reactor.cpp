@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/28 20:10:52 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/31 17:22:58 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/31 18:11:26 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "Sending.hpp"
 #include "Server.hpp"
 #include "Request.hpp"
+#include "Handler.hpp"
 
 #include <stdexcept>
 #include <iostream>
@@ -102,12 +103,15 @@ void Reactor::monitorInterests()
 				int n = recv(event, buffer, sizeof(buffer), 0);
 				if (n > 0)
 				{
-					std::cout << buffer << std::endl;
+					//std::cout << buffer << std::endl;
 
 					Request req(*server->getSocket(event), buffer);
 					std::cout << req << std::endl;
 
-					Sending::sendPage(event, "html/test.html");
+					Handler handler;
+					handler.handleRequest(req);
+
+					//Sending::sendPage(event, "html/test.html");
 				}
 			}
 		}

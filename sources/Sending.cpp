@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/30 17:40:22 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/30 22:04:14 by ferre         ########   odam.nl         */
+/*   Updated: 2025/05/31 18:28:40 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,21 @@ void Sending::sendError(int target)
 	send(target, header.c_str(), header.length(), 0);
 }
 
-void Sending::sendHeader(int target, size_t size)
+void Sending::sendHeader(int target, size_t size, Sending::HeaderType type)
 {
 	std::stringstream headerStream;
-	headerStream << "HTTP/1.1 200 OK\r\n";
-	headerStream << "Content-Type: text/html; charset=UTF-8\r\n";
+
+	if (type == Sending::HeaderType::Error) headerStream << "HTTP/1.1 404 Not Found\r\n";
+	else headerStream << "HTTP/1.1 200 OK\r\n";
+
+	if (type == Sending::HeaderType::Css) headerStream << "Content-Type: text/css; charset=UTF-8\r\n";
+	else if (type == Sending::HeaderType::Html) headerStream << "Content-Type: text/html; charset=UTF-8\r\n";
+
     headerStream << "Content-Length: " << size << "\r\n";
-    headerStream << "Connection: keep-alive\r\n";
+
+	if (type == Sending::HeaderType::Error) headerStream << "Connection: close\r\n";
+    else headerStream << "Connection: keep-alive\r\n";
+
     headerStream << "\r\n";
 	std::string header = headerStream.str();
 
@@ -79,9 +87,26 @@ void Sending::sendContent(int target, std::string content)
 
 void Sending::sendPage(int target, std::string path)
 {
+	if (path == "/") path = "/test";
+
+	Sending::HeaderType type;
+
+	if (path.find(".css") != std::string::npos)
+	{
+		type = Sending::HeaderType::Css;
+		path.replace(0, 1, "css/");
+		//path.append(".html");
+	}
+	else
+	{
+		type = Sending::HeaderType::Html;
+		path.replace(0, 1, "html/");
+		path.append(".html");
+	}
+
 	std::string content = Sending::fileToString(path);
 
-	Sending::sendHeader(target, content.length());
+	Sending::sendHeader(target, content.length(), type);
 	Sending::sendContent(target, content);
 
 	//close(target);
