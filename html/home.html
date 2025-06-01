@@ -1,17 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title>Test website</title>
+	<link rel="stylesheet" href="/css/bootstrapcss/bootstrap.css">
 	<link rel="stylesheet" href="/css/style.css">
-<title>Page Title</title>
 </head>
 <body>
 
-<h1>This is the home page</h1>
-<p>This is a paragraph.</p>
-<a href="/html/link.html">This is a link to another page</a>
-<br>
-<br>
-<a href="/html/scream.html">Make me scream</a>
+	<nav class="navbar fixed-top navbar-expand-lg nav floatOnStart">
+		<div class="container-fluid">
+			<a href="/html/home.html" class="navbar-brand">
+				<h1 class="logoText">Ferre Molenbeek</h1>
+			</a>
+			<div class="row">
+				<div class="col">
+		  			<a href="/html/form.html">
+						<div type="button" class="butt">FORMS</div>
+		  			</a>
+				</div>
+				<div class="col">
+		  			<a href="/newForm">
+						<div type="button" class="butt">NONE</div>
+					</a>
+				</div>
+				<div class="col">
+					<div id="darkmodeButton" class="butt" type="button" onclick="darkMode()">SAD</div>
+				</div>
+				<div class="col">
+					<div class="butt" type="button">CONTACT</div>
+				</div>
+				<div class="col">
+					<div class="butt" type="button">MENU</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container" style="margin-top: 250px;">
+		<div class="row">
+			<div class="col">
+				<h1 class="mainText floatOnStart anim1s">Hello,</h1>
+				<h1 class="mainText floatOnStart anim2s">My name is Ferre</h1>
+				<h1 class="mainText floatOnStart anim3s">This is my portfolio</h1>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 15px; margin-left: -50px;">
+			<div class="col col-lg-1 mx-5">
+				<a href="" class="floatOnStart anim4s">
+					<div type="button" class="butt butt-slide">Contact</div>
+				</a>
+			</div>
+			<div class="col col-lg-1 mx-5">
+				<a href="" class="floatOnStart anim4_5s">
+					<div type="button" class="butt butt-slide">Projects</div>
+				</a>
+			</div>
+			<div class="col col-lg-1 mx-5">
+				<a href="" class="floatOnStart anim5s">
+					<div type="button" class="butt butt-slide">Expertises</div>
+				</a>
+			</div>
+			<div class="col col-lg-1 mx-5">
+				<a href="" class="floatOnStart anim5_5s">
+					<div type="button" class="butt butt-slide">Experience</div>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<script src="/js/script.js"></script>
 
 </body>
 </html> 

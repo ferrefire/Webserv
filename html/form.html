@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Test website</title>
+  <link rel="stylesheet" href="/css/bootstrapcss/bootstrap.css">
+  <link rel="stylesheet" href="/css/stylesheet.css">
+  <link rel="icon" type="image/png" href="../Images/favicon.png">
+</head>
+<body>
+
+  <nav class="navbar fixed-top navbar-expand-lg navBi floatOnStart">
+    <div class="container-fluid">
+      <a href="/html/test.html" class="navbar-brand">
+        <img src="https://www.trainingair.com/images/layout/name.svg" width="150" height="60"
+          style="margin: -5px; margin-left: 5px;">
+      </a>
+      <div class="row">
+        <div class="col">
+          <div id="darkmodeButton" class="butt" type="button" onclick="darkMode()">SAD</div>
+        </div>
+        <div class="col">
+          <div class="butt" type="button">CONTACT</div>
+        </div>
+        <div class="col">
+          <div class="butt" type="button">MENU</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <form id="submissionForm">
+  <div class="container" style="margin-top: 200px;">
+    <div class="card car">
+      <div class="card-header carHead" style="font-size: 27.5px;
+        border-radius: 10px 10px 0px 0px;">TRAINING ASSESSMENT FORM</div>
+      <div class="card-header carHead-sec">
+        <ul class="nav nav-pills card-header-pills">
+          <li class="nav-item">
+            <div onclick="setForm('0')" name="formHead" type="button"
+              class="nav-link carNavButt active">Instructions</div>
+          </li>
+          <li class="nav-item">
+            <div onclick="setForm('1')" name="formHead" type="button"
+              class="nav-link carNavButt">Personal details</div>
+          </li>
+          <li class="nav-item">
+            <div onclick="setForm('2')" name="formHead" type="button"
+              class="nav-link carNavButt">Main licence details</div>
+          </li>
+          <li class="nav-item">
+            <div onclick="setForm('3')" name="formHead" type="button"
+              class="nav-link carNavButt">Flight experience</div>
+          </li>
+          <li class="nav-item">
+            <div onclick="setForm('4')" name="formHead" type="button"
+              class="nav-link carNavButt">Attachments</div>
+          </li>
+          <li class="nav-item">
+            <div onclick="setForm('5')" name="formHead" type="button"
+              class="nav-link carNavButt">Training requested</div>
+          </li>
+        </ul>
+      </div>
+      <div name="formBody" class="card-body carBod hide">
+        <p class="carTit" style="font-size: 17.5px;">
+          This form must be filled in completely in order to asses training requirements.
+          We prefer PDF scans of the requested documents, however a clear image is acceptable.
+        </p>
+        <div onclick="nextForm()" type="button" class="butt fr">CONTINUE</div>
+      </div>
+      <div name="formBody" class="card-body carBod d-none hide">
+        <div class="row">
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="firstName">First name</span>
+              <input type="text" name="firstName" class="form-control inputField" placeholder="First name"
+                aria-label="First name" aria-describedby="firstName">
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="lastName">Last name</span>
+              <input type="text" name="lastName" class="form-control inputField" placeholder="Last name"
+                aria-label="Last name" aria-describedby="lastName">
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="email">email</span>
+              <input type="email" name="email" class="form-control inputField" placeholder=
+              "example@gmail.com" aria-label="example@gmail.com" aria-describedby="email">
+            </div>
+          </div>         
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="country">Country</span>
+              <select id="countrySelect" class="form-select inputField" aria-describedby="country" name="country">
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="region">Region</span>
+              <select id="regionSelect" class="form-select inputField" aria-describedby="region" name="region">
+                <option selected>Please select a country first</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="city">City</span>
+              <select id="citySelect" class="form-select inputField" aria-describedby="city" name="city">
+                <option selected>Please select a region first</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="phoneNumber">Phone number</span>
+              <span class="input-group-text inputField" id="countryNum">+31</span>
+              <input type="tel" name="phoneNumber" class="form-control inputField" placeholder=
+              "6 27 54 30 68" aria-label="6 27 54 30 68" aria-describedby="phoneNumber">
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="address">Address</span>
+              <input type="text" name="address" class="form-control inputField" placeholder="Address"
+                aria-label="Address" aria-describedby="address">
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="postalCode">Postal code</span>             
+              <input type="text" name="postalCode" class="form-control inputField" placeholder="Postal code"
+                aria-label="Postal code" aria-describedby="postalCode">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="nationality">Nationality</span>
+              <input type="text" name="nationality" class="form-control inputField" placeholder="Nationality"
+                aria-label="Nationality" aria-describedby="nationality">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="passportNumber">Passport number</span>
+              <input type="text" name="passportNumber" class="form-control inputField" placeholder="Passport number"
+                aria-label="Passport number" aria-describedby="passportNumber">
+            </div>
+          </div>
+        </div>
+        <div onclick="nextForm()" type="button" class="butt fr">CONTINUE</div>
+        <div onclick="prevForm()" type="button" class="butt fl">GO BACK</div>
+      </div>
+      <div name="formBody" class="card-body carBod d-none hide">
+        <p class="carTit" style="font-size: 17.5px;">
+          <div class="row">
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="licenceType">Licence type</span>
+                <select class="form-select inputField" aria-describedby="licenceType" name="licenceType">
+                  <option selected>-</option>
+                  <option>CPL</option>
+                  <option>MPL</option>
+                  <option>ATPL</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="licenceCountry">Licence country</span>
+                <select class="form-select inputField" aria-describedby="licenceCountry" name="licenceCountry">                 
+                  <option value="" selected="">-</option>
+                  <option value="AT">Austria</option>
+                  <option value="BE">Belgium</option>
+                  <option value="BG">Bulgaria</option>
+                  <option value="HR">Croatia</option>
+                  <option value="CY">Cyprus</option>
+                  <option value="CZ">Czechia</option>
+                  <option value="DK">Denmark</option>
+                  <option value="EE">Estonia</option>
+                  <option value="FI">Finland</option>
+                  <option value="FR">France</option>
+                  <option value="DE">Germany</option>
+                  <option value="GR">Greece</option>
+                  <option value="HU">Hungary</option>
+                  <option value="IS">Iceland</option>
+                  <option value="IE">Ireland</option>
+                  <option value="IT">Italy</option>
+                  <option value="LV">Latvia</option>
+                  <option value="LI">Liechtenstein</option>
+                  <option value="LT">Lithuania</option>
+                  <option value="LU">Luxemburg</option>
+                  <option value="MT">Malta</option>
+                  <option value="NL">Netherlands</option>
+                  <option value="NO">Norway</option>
+                  <option value="PL">Poland</option>
+                  <option value="PT">Portugal</option>
+                  <option value="RO">Romania</option>
+                  <option value="SK">Slovakia</option>
+                  <option value="SI">Slovenia</option>
+                  <option value="ES">Spain</option>
+                  <option value="SE">Sweden</option>
+                  <option value="CH">Switzerland</option>
+                  <option value="" disabled="">-----------</option>
+                  <option value="GB">United Kingdom (CAA)</option>
+                  <option value="UA">Ukraine (SAAU)</option>
+                  <option value="US">United States (FAA)</option>
+                  <option value="HK">Hong Kong (CAD)</option>
+                  <option value="NON">Other non-EASA</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="licenceNumber">Licence number</span>
+                <input type="text" name="licenceNumber" class="form-control inputField" placeholder="00000000"
+                  aria-label="Licence number" aria-describedby="licenceNumber">
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="dateOfIssue">Date of issue</span>
+                <input type="date" name="dateOfIssue" class="form-control inputField" aria-describedby="dateOfIssue">
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="expiryDate">Expiry date</span>
+                <input type="date" name="expiryDate" class="form-control inputField" aria-describedby="expiryDate">
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="c1MedicalExpiry">Class 1 medical expiry</span>
+                <input type="date" name="c1MedicalExpiry" class="form-control inputField" aria-describedby="c1MedicalExpiry">
+              </div>
+            </div>
+          </div>
+        </p>
+        <div onclick="nextForm()" type="button" class="butt fr">CONTINUE</div>
+        <div onclick="prevForm()" type="button" class="butt fl">GO BACK</div>
+      </div>
+      <div name="formBody" class="card-body carBod d-none hide">
+          <div class="row" style="margin-bottom: -15px;">
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="currentRating">Current rating held</span>
+                <select class="form-select inputField" aria-describedby="currentRating" name="currentRating">
+                  <option selected>-</option>
+                  <option>Airbus A320</option>
+                  <option>Airbus A330</option>
+                  <option>Airbus A340</option>
+                  <option>Airbus A350</option>
+                  <option>Boeing 737NG</option>
+                  <option>Other Jet (B757, E190, ...)</option>
+                  <option>Other Prop (B1900, Q400, ...)</option>
+                  <option>Single-Pilot MEP/IR</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="dateOfLastLPC">Date of last LPC</span>
+                <input type="date" name="dateOfLastLPC" class="form-control inputField" aria-describedby="dateOfLastLPC">
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="LPCExpiryDate">LPC expiry date</span>
+                <input type="date" name="LPCExpiryDate" class="form-control inputField" aria-describedby="LPCExpiryDate">
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="hoursOnType">Hours on type</span>
+                <input type="number" name="hoursOnType" class="form-control inputField" placeholder="Hours on type"
+                  aria-label="Hours on type" aria-describedby="hoursOnType">
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="dateLastFlown">Date last flown</span>
+                <input type="date" name="dateLastFlown" class="form-control inputField" aria-describedby="dateLastFlown">
+              </div>
+            </div>
+            <!-- 
+            This part does not have name tags yet
+            -->
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="rba2">Function</span>             
+                <input type="radio" class="btn-check" name="options-outlined2" 
+                  id="PICrad2" autocomplete="off" aria-describedby="rba2">
+                <label class="btn btn-outline-primary inputField" for="PICrad2">PIC</label>
+                <input type="radio" class="btn-check" name="options-outlined2" 
+                  id="FOrad2" autocomplete="off" aria-describedby="rba2">
+                <label class="btn btn-outline-primary inputField" for="FOrad2">FO/Trainee</label>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="otherRatingHeld">Other rating held (if any)</span>
+                <select class="form-select inputField" aria-describedby="otherRatingHeld" name="otherRatingHeld">
+                  <option selected>-</option>
+                  <option>Airbus A320</option>
+                  <option>Airbus A330</option>
+                  <option>Airbus A340</option>
+                  <option>Airbus A350</option>
+                  <option>Boeing 737NG</option>
+                  <option>Other Jet (B757, E190, ...)</option>
+                  <option>Other Prop (B1900, Q400, ...)</option>
+                  <option>Single-Pilot MEP/IR</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="dateOfLastLPC">Date of last LPC</span>
+                <input type="date" name="dateOfLastLPC" class="form-control inputField" aria-describedby="dateOfLastLPC">
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="LPCExpiryDate2">LPC expiry date</span>
+                <input type="date" name="LPCExpiryDate2" class="form-control inputField" aria-describedby="LPCExpiryDate2">
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="hoursOnType2">Hours on type</span>
+                <input type="number" name="hoursOnType2" class="form-control inputField" placeholder="Hours on type"
+                  aria-label="Hours on type" aria-describedby="hoursOnType2">
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="dateLastFlown2">Date last flown</span>
+                <input type="date" name="dateLastFlown2" class="form-control inputField" aria-describedby="dateLastFlown2">
+              </div>
+            </div>
+            <!-- No name tags here yet-->
+
+            <div class="col-lg-4 col-12">
+              <div class="input-group mb-3">
+                <span class="input-group-text inputName" id="rba">Function</span>             
+                <input type="radio" class="btn-check" name="options-outlined" 
+                  id="PICrad" autocomplete="off" aria-describedby="rba">
+                <label class="btn btn-outline-primary inputField" for="PICrad">PIC</label>
+                <input type="radio" class="btn-check" name="options-outlined" 
+                  id="FOrad" autocomplete="off" aria-describedby="rba">
+                <label class="btn btn-outline-primary inputField" for="FOrad">FO/Trainee</label>
+              </div>
+            </div>
+          </div>
+        <div onclick="nextForm()" type="button" class="butt fr">CONTINUE</div>
+        <div onclick="prevForm()" type="button" class="butt fl">GO BACK</div>
+      </div>
+      <div name="formBody" class="card-body carBod d-none hide">
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="passport">Passport</span>
+              <input type="file" name="passport" class="form-control inputField" aria-describedby="passport">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="EASALicence">EASA Licence</span>
+              <input type="file" name="EASALicence" class="form-control inputField" aria-describedby="EASALicence">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="otherLicence">Other Licence</span>
+              <input type="file" name="otherLicence" class="form-control inputField" aria-describedby="otherLicence">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="medicalCertificate">Medical certificate</span>
+              <input type="file" name="medicalCertificate" class="form-control inputField" aria-describedby="medicalCertificate">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="logBookTwoPages">Logbook: last 2 pages</span>
+              <input type="file" name="logBookTwoPages" class="form-control inputField" aria-describedby="logBookTwoPages">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="lastProficiencyCheck">Last Proficiency Check (signature)</span>
+              <input type="file" name="lastProficiencyCheck" class="form-control inputField" aria-describedby="lastProficiencyCheck">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="MCCCertificate">CPL Only: MCC Certificate</span>
+              <input type="file" name="MCCCertificate" class="form-control inputField" aria-describedby="MCCCertificate">
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="UPRTCertificate">First Type Rating: UPRT Certificate</span>
+              <input type="file" name="UPRTCertificate" class="form-control inputField" aria-describedby="UPRTCertificate">
+            </div>
+          </div>
+        </div>
+        <div onclick="nextForm()" type="button" class="butt fr">CONTINUE</div>
+        <div onclick="prevForm()" type="button" class="butt fl">GO BACK</div>
+      </div>
+      <!-- From here forward NO NAME TAGS IMPLEMENTED-->
+      <div name="formBody" class="card-body carBod d-none">
+        <div class="row">
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <div class="form-check">
+                <input class="form-check-input inputCheckbox" type="checkbox" id="typeRatingCourse">
+                <label class="form-check-label inputChecklabel inputChecklabel" for="typeRatingCourse">
+                  Type Rating Course</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <div class="form-check">
+                <input class="form-check-input inputCheckbox" type="checkbox" id="typeRatingEndorsement">
+                <label class="form-check-label inputChecklabel" for="typeRatingEndorsement">
+                  Type rating Endorsement</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <div class="form-check">
+                <input class="form-check-input inputCheckbox" type="checkbox" id="courseOrSeminar">
+                <label class="form-check-label inputChecklabel" for="courseOrSeminar">
+                  TRI / SFI Course or Seminar</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <div class="form-check">
+                <input class="form-check-input inputCheckbox" type="checkbox" id="licenceProficiencyCheck">
+                <label class="form-check-label inputChecklabel" for="licenceProficiencyCheck">
+                  Licence Proficiency check</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <div class="form-check">
+                <input class="form-check-input inputCheckbox" type="checkbox" id="assessmentOfCompetence">
+                <label class="form-check-label inputChecklabel" for="assessmentOfCompetence">
+                  TRI / SFI Assessment Of Competence</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <div class="form-check">
+                <input class="form-check-input inputCheckbox" type="checkbox" id="englishLanProf">
+                <label class="form-check-label inputChecklabel" for="englishLanProf">
+                  English Language Proficiency</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">          
+          <div class="col-lg-4 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="aircraft">Aircraft</span>
+              <select class="form-select inputField" aria-describedby="aircraft" name="aircraft">
+                <option selected>-</option>
+                <option>Airbus A320 Family</option>
+                <option>Airbus A330</option>
+                <option>Airbus A340</option>
+                <option>Airbus A350</option>
+                <option>Boeing 737NG</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-8 col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text inputName" id="rba3">Timeframe for Training</span>             
+              <input type="radio" class="btn-check" name="options-outlined3" 
+                id="lessThan6" autocomplete="off" aria-describedby="rba3" value="lessThan6">
+              <label class="btn btn-outline-primary inputField" for="lessThan6">Less than 6 weeks </label>
+              <input type="radio" class="btn-check" name="options-outlined3" 
+                id="6to12" autocomplete="off" aria-describedby="rba3" value="6to12">
+              <label class="btn btn-outline-primary inputField" for="6to12">6-12 weeks</label>
+              <input type="radio" class="btn-check" name="options-outlined3" 
+                id="moreThan12" autocomplete="off" aria-describedby="rba3" value="moreThan12">
+              <label class="btn btn-outline-primary inputField" for="moreThan12">More than 12 weeks</label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="butt fr">DONE</button>
+        <div onclick="prevForm()" type="button" class="butt fl">GO BACK</div>
+      </div>     
+    </div>
+  </div>
+  </form>
+
+  <script src="/js/script.js"></script>
+  <!--<script src="/js/bootstrapjs/bootstrap.bundle.js"></script>
+  <script src="/js/country_state_city.js"></script>-->
+  <script src="/js/submitForum.js"></script>
+
+</body>
+</html>

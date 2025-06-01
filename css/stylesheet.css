@@ -15,6 +15,7 @@
   --card-bg:rgba(255, 255, 255, 0.95);
   
   --animDur:1s;
+  --animDel:1s;
   --def-main-text:#231F20;
   /*--bg:#e9e9e9;*/
   --bg:rgb(238, 238, 238);
@@ -92,6 +93,13 @@
   transition: transform 0.25s;
 }
 
+.dissappearOnStart
+{
+  animation: onStartDissappear var(--animDur);
+  animation-fill-mode: forwards;
+  transition: transform 0.25s;
+}
+
 /*Floats element up when hovered over.*/
 .floatOnHover 
 {
@@ -104,15 +112,17 @@
 }
 
 /*Animation classes for delaying the start animation.*/
-.anim1s { animation-delay: calc(1 * var(--animDur)); }
-.anim1_5s { animation-delay: calc(1.5 * var(--animDur)); }
-.anim1_75s { animation-delay: calc(1.75 * var(--animDur)); }
-.anim2s { animation-delay: calc(2 * var(--animDur)); }
-.anim2_25s { animation-delay: calc(2.25 * var(--animDur)); }
-.anim2_5s { animation-delay: calc(2.5 * var(--animDur)); }
-.anim2_75s { animation-delay: calc(2.75 * var(--animDur)); }
-.anim3s { animation-delay: calc(3 * var(--animDur)); }
-.anim3_25s { animation-delay: calc(3.25 * var(--animDur)); }
+.anim0s { animation-delay: calc(var(--animDel)); }
+.anim1s { animation-delay: calc(1 * (var(--animDur) + var(--animDel))); }
+.anim1_25s { animation-delay: calc(1.25 * (var(--animDur) + var(--animDel))); }
+.anim1_5s { animation-delay: calc(1.5 * (var(--animDur) + var(--animDel))); }
+.anim1_75s { animation-delay: calc(1.75 * (var(--animDur) + var(--animDel))); }
+.anim2s { animation-delay: calc(2 * (var(--animDur) + var(--animDel))); }
+.anim2_25s { animation-delay: calc(2.25 * (var(--animDur) + var(--animDel))); }
+.anim2_5s { animation-delay: calc(2.5 * (var(--animDur) + var(--animDel))); }
+.anim2_75s { animation-delay: calc(2.75 * (var(--animDur) + var(--animDel))); }
+.anim3s { animation-delay: calc(3 * (var(--animDur) + var(--animDel))); }
+.anim3_25s { animation-delay: calc(3.25 * (var(--animDur) + var(--animDel))); }
 
 /*Moves element to the right of the parent.*/
 .fr {float: right;}
@@ -258,6 +268,20 @@
   100%
   {
     opacity: 1;
+  }
+}
+
+@keyframes onStartDissappear
+{
+  0%
+  {
+	opacity: 1;
+    transform: translate(0px, 0px);
+  }
+  100%
+  {
+    opacity: 0;
+    transform: translate(0px, -100px);
   }
 }
 

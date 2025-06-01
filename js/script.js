@@ -27,7 +27,7 @@ function darkMode()
     document.body.style.setProperty('--navbar-bg',"rgba(0, 0, 0, 0.95)");
     document.body.style.setProperty('--card-bg',"rgba(15, 15, 15, 1)");
     document.body.style.setProperty('--def-main-text',"white");
-    document.body.style.setProperty('--bg',"rgba(5, 5, 5, 1)");
+    document.body.style.setProperty('--bg',"rgb(10, 10, 10)");
     document.body.style.setProperty('--bgGrad',"rgba(5, 5, 5, 0.5)");
     document.body.style.setProperty('--input-name-bg',"rgba(25, 25, 25, 1)");
     document.body.style.setProperty('--input-border',"rgba(50, 50, 50, 1)");
