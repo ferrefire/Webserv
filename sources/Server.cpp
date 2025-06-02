@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/28 19:39:58 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/31 17:22:09 by ferre         ########   odam.nl         */
+/*   Updated: 2025/06/02 14:14:04 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <exception>
 
 #include <unistd.h>
+#include <arpa/inet.h>
 
 Server::Server()
 {
@@ -57,7 +58,8 @@ void Server::createServerSocket()
 
 	serverSocket->address.sin_family = AF_INET;
 	serverSocket->address.sin_port = htons(8080);
-	serverSocket->address.sin_addr.s_addr = INADDR_ANY;
+	//serverSocket->address.sin_addr.s_addr = INADDR_ANY;
+	serverSocket->address.sin_addr.s_addr = inet_addr("192.168.68.127");
 	serverSocket->length = sizeof(serverSocket->address);
 
 	if (bind(serverSocket->descriptor, (sockaddr *)&serverSocket->address, serverSocket->length) < 0) throw (std::runtime_error("failed to bind socket"));

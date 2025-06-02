@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/31 16:27:03 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/31 20:47:17 by ferre         ########   odam.nl         */
+/*   Updated: 2025/06/02 14:19:10 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Request
 
 		enum class Data {Method, Page, Host, Port, Type, Referer, Connection};
 		std::pair<std::string, std::string> searchRanges[7] = 
-			{{"", " "}, {" ", " "}, {"Host: ", ":"}, {":", "\n"}, {"Sec-Fetch-Dest: ", "\r"}, {"Referer: ", "\n"}, {"Connection: ", "\n"}};
+			{{"", " "}, {" ", " "}, {"Host: ", ":"}, {":", "\n"}, {"Accept: ", "\r"}, {"Referer: ", "\n"}, {"Connection: ", "\n"}};
 
 		std::string getData(Request::Data type);
 		Socket& getSocket();

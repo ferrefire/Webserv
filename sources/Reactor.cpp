@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/28 20:10:52 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/31 20:42:05 by ferre         ########   odam.nl         */
+/*   Updated: 2025/06/02 14:17:32 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void Reactor::monitorInterests()
 				newSocket->descriptor = accept(serverDescriptor, (sockaddr *)&newSocket->address, &newSocket->length);
 
 				addInterest(newSocket->descriptor);
-				std::cout << "added new client: " << newSocket->descriptor << std::endl;
+				std::cout << "added new client: " << newSocket->descriptor << std::endl << std::endl;
 			}
 			else
 			{
@@ -106,7 +106,8 @@ void Reactor::monitorInterests()
 					std::cout << buffer << std::endl;
 
 					Request req(*server->getSocket(event), buffer);
-					std::cout << req << std::endl;
+					std::cout << req << std::endl << std::endl;
+					//std::cout << "new " << req.getData(Request::Data::Method) << " request" << std::endl << std::endl;
 
 					Handler handler;
 					handler.handleRequest(req);

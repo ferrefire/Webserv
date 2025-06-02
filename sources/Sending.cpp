@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/30 17:40:22 by ferre         #+#    #+#                 */
-/*   Updated: 2025/05/31 20:43:25 by ferre         ########   odam.nl         */
+/*   Updated: 2025/06/02 14:20:55 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,14 @@ void Sending::sendContent(int target, std::string content)
 void Sending::sendPage(int target, std::string path, Request request)
 {
 	Sending::HeaderType type = Sending::HeaderType::Error;
-	if (request.getData(Request::Data::Type) == "document") type = Sending::HeaderType::Html;
-	else if (request.getData(Request::Data::Type) == "style") type = Sending::HeaderType::Css;
-	else if (request.getData(Request::Data::Type) == "script") type = Sending::HeaderType::Js;
+	//if (request.getData(Request::Data::Type) == "document") type = Sending::HeaderType::Html;
+	//else if (request.getData(Request::Data::Type) == "style") type = Sending::HeaderType::Css;
+	//else if (request.getData(Request::Data::Type) == "script") type = Sending::HeaderType::Js;
+	if (request.getData(Request::Data::Type).contains("text/html")) type = Sending::HeaderType::Html;
+	else if (request.getData(Request::Data::Type).contains("text/css")) type = Sending::HeaderType::Css;
+	else if (request.getData(Request::Data::Type) == "*/*") type = Sending::HeaderType::Js;
 
-	std::cout << path << " - " << (int)type << std::endl;
+	//std::cout << path << " - " << (int)type << std::endl;
 
 	std::string content = Sending::fileToString(path);
 
