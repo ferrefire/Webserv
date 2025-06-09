@@ -108,6 +108,7 @@ body
 	border-color: var(--primary-color);
 	color: var(--secondary-color);
 	padding-right: 750px;
+	transition: all 0.25s, padding 0.75s;
 	/*text-align: start;*/
 }
 
