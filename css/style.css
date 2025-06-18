@@ -37,6 +37,11 @@
 	transition: 0.25s;
 }
 
+.instant
+{
+	transition: 0.0s;
+}
+
 body
 {
 	transition: 0.0s;
