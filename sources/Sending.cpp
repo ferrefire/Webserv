@@ -6,7 +6,7 @@
 /*   By: ferre <ferre@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/30 17:40:22 by ferre         #+#    #+#                 */
-/*   Updated: 2025/06/02 14:20:55 by ferre         ########   odam.nl         */
+/*   Updated: 2025/06/18 19:45:46 by ferre         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ Sending::~Sending()
 
 std::string Sending::fileToString(std::string path)
 {
+	std::string include = "#include ";
+
 	std::string content;
 	std::string line;
 					
@@ -40,7 +42,16 @@ std::string Sending::fileToString(std::string path)
 
 	if (!file.is_open()) throw (std::runtime_error("failed to open file"));
 
-	while (std::getline(file, line)) content.append(line);
+	while (std::getline(file, line))
+	{
+		if (line.contains(include))
+		{
+			size_t start = line.find(include) + include.length();
+			size_t end = line.length() - start;
+			line = "<script> " + fileToString(line.substr(start, end)) + " </script>";
+		}
+		content.append(line);
+	}
 
 	file.close();
 

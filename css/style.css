@@ -20,16 +20,27 @@
 	--inputInvalid: #dc3545;
 }
 
-*
+*:not(body, nav)
+{
+	opacity: 0;
+	transition: 0.25s;
+	font-family: Helvetica, sans-serif;
+}
+
+.visible
+{
+	opacity: 1;
+}
+
+.smooth
 {
 	transition: 0.25s;
-	/*animation: onStart var(--animDur);
-	animation-fill-mode: backwards;*/
-	font-family: Helvetica, sans-serif;
 }
 
 body
 {
+	transition: 0.0s;
+	opacity: 1;
 	background-color: var(--secondary-tint-color);
 }
 
@@ -47,10 +58,11 @@ body
 	transition: transform 0.25s;
 }
 
-.nav
+nav
 {
+	transition: 0.0s;
+	opacity: 1;
 	background-color: var(--secondary-color);
-	/*transition: 0.25s;*/
 }
 
 .butt
